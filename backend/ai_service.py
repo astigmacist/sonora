@@ -378,7 +378,8 @@ def _generate_with_web_api(*, model: str, messages: list[dict[str, str]]) -> Gen
         "Content-Type": "application/json",
     }
     if provider == "openrouter":
-        headers["HTTP-Referer"] = os.getenv("SONORA_SITE_URL", "http://localhost:5173")
+        site_url = os.getenv("SONORA_SITE_URL", "").strip() or "http://localhost:5173"
+        headers["HTTP-Referer"] = site_url
         headers["X-OpenRouter-Title"] = "SONORA"
     timeout = float(os.getenv("SONORA_AI_TIMEOUT", "90"))
     ssl_context = _verified_https_context()

@@ -781,6 +781,7 @@ class QwenAdapterTestCase(unittest.TestCase):
                     "SONORA_AI_MODEL": "minimax/minimax-m3:free",
                     "SONORA_AI_API_KEY": "secret-test-key",
                     "SONORA_AI_TIMEOUT": "3.5",
+                    "SONORA_SITE_URL": "https://sonora.example\n",
                 },
             ),
             patch.object(ai_service.request, "urlopen", side_effect=mocked_urlopen) as urlopen,
@@ -805,6 +806,7 @@ class QwenAdapterTestCase(unittest.TestCase):
         )
         self.assertNotIn("enable_thinking", captured["payload"])
         self.assertEqual(captured["headers"]["Authorization"], "Bearer secret-test-key")
+        self.assertEqual(captured["headers"]["Http-referer"], "https://sonora.example")
         self.assertEqual(captured["headers"]["X-openrouter-title"], "SONORA")
         self.assertNotIn("secret-test-key", json.dumps(captured["payload"]))
         self.assertIsInstance(captured["ssl_context"], ssl.SSLContext)

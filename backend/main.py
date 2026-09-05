@@ -30,7 +30,7 @@ def default_database_path() -> str:
     return str(storage.DEFAULT_DB_PATH)
 
 
-DB_PATH = os.getenv("SONORA_DB_PATH", default_database_path())
+DB_PATH = os.getenv("SONORA_DB_PATH", "").strip() or default_database_path()
 
 storage.init_db(DB_PATH)
 
