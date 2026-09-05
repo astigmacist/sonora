@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.vercel/
+.artifact_work/
+_artifact_work/
+.codex-finalizer/
+~$*
+*.db
+*.db-shm
+*.db-wal
